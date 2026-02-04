@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Valentine 💖</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffb6c1, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Segoe UI", Arial, sans-serif;
+    overflow: hidden;
+}
+
+.card {
+    background: white;
+    padding: 35px;
+    border-radius: 25px;
+    width: 420px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(255, 105, 135, 0.4);
+    z-index: 2;
+}
+
+h1 {
+    color: #ff4d6d;
+}
+
+button {
+    padding: 12px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.yes {
+    background: #ff4d6d;
+    color: white;
+}
+
+.no {
+    background: #f2f2f2;
+    color: #555;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Bouquet animation */
+.bouquet {
+    font-size: 60px;
+    animation: floatBouquet 2s infinite ease-in-out;
+    margin-bottom: 15px;
+}
+
+@keyframes floatBouquet {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Hearts */
+.heart {
+    position: absolute;
+    font-size: 22px;
+    color: #ff4d6d;
+    animation: rise 6s linear infinite;
+}
+
+@keyframes rise {
+    from {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-10vh);
+        opacity: 1;
+    }
+}
+
+/* Typing text */
+.poem {
+    color: #ff4d6d;
+    font-size: 16px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <h1 id="question">Would you like to be my Valentine? 💕</h1>
+    <button class="yes" onclick="startLove()">Yes 💘</button>
+    <button class="no">No 🙈</button>
+
+    <div id="loveScene" class="hidden">
+        <div class="bouquet">💐🌹🌸</div>
+        <div class="poem" id="poemText"></div>
+    </div>
+</div>
+
+<script>
+const poem = `In the world’s loud noise, you’re my soul’s deep light,
+The flame that keeps my spirit burning bright.
+With every breath, I’m yours—completely true,
+My heart’s only home is found inside of you.
+
+In every heartbeat, it’s your name I find,
+The sweetest peace and home within my mind.
+I love you more than words could ever say,
+My favorite part of every single day. 💖`;
+
+function startLove() {
+    document.getElementById("question").style.display = "none";
+    document.querySelector(".yes").style.display = "none";
+    document.querySelector(".no").style.display = "none";
+
+    document.getElementById("loveScene").classList.remove("hidden");
+
+    typeWriter(poem);
+    createHearts();
+}
+
+let index = 0;
+function typeWriter(text) {
+    if (index < text.length) {
+        document.getElementById("poemText").textContent += text.charAt(index);
+        index++;
+        setTimeout(() => typeWriter(text), 40);
+    }
+}
+
+function createHearts() {
+    for (let i = 0; i < 30; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDelay = Math.random() * 5 + "s";
+        document.body.appendChild(heart);
+    }
+}
+</script>
+
+</body>
+</html> 
